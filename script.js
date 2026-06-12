@@ -1,5 +1,5 @@
 // Point this to your deployed backend
-const API_URL = 'https://pixelforge-3-h4s2.onrender.com';
+const API_URL = 'https://pixelforge-3-h4s2.onrender.com/api/filter';
 
 const imageInput = document.getElementById('imageInput');
 const fileName = document.getElementById('fileName');
