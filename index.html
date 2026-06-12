@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Filter Studio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>✨ Image Filter Studio</h1>
+            <p>Upload an image, choose a filter, and see the magic happen.</p>
+        </header>
+
+        <main>
+            <!-- Upload Section -->
+            <section class="upload-section">
+                <div class="drop-zone" id="dropZone">
+                    <input type="file" id="imageInput" accept="image/*" hidden>
+                    <label for="imageInput" class="upload-btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <span>Click to upload or drag & drop an image</span>
+                    </label>
+                    <p class="file-name" id="fileName">No file chosen</p>
+                </div>
+            </section>
+
+            <!-- Controls Section -->
+            <section class="controls-section">
+                <div class="control-group">
+                    <label for="filterSelect">Select Filter:</label>
+                    <select id="filterSelect">
+                        <option value="grayscale">Grayscale</option>
+                        <option value="invert">Invert</option>
+                        <option value="sepia">Sepia</option>
+                        <option value="red">Red Channel</option>
+                        <option value="green">Green Channel</option>
+                        <option value="blue">Blue Channel</option>
+                        <option value="blur">Blur</option>
+                        <option value="sharpen">Sharpen</option>
+                        <option value="brightness">Brightness</option>
+                        <option value="flip_horizontal">Flip Horizontal</option>
+                        <option value="flip_vertical">Flip Vertical</option>
+                        <option value="pixelate">Pixelate</option>
+                        <option value="edge_detection">Edge Detection</option>
+                    </select>
+                </div>
+                <button id="applyBtn" class="apply-btn" disabled>Apply Filter</button>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section">
+                <div class="image-card">
+                    <h3>Original</h3>
+                    <div class="image-wrapper">
+                        <img id="originalImage" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f0f0f0'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23999' font-family='sans-serif' font-size='16'%3ENo image uploaded%3C/text%3E%3C/svg%3E" alt="Original Image">
+                    </div>
+                </div>
+
+                <div class="image-card">
+                    <h3>Filtered Result</h3>
+                    <div class="image-wrapper" id="resultWrapper">
+                        <img id="resultImage" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f0f0f0'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23999' font-family='sans-serif' font-size='16'%3EResult will appear here%3C/text%3E%3C/svg%3E" alt="Filtered Image">
+                        
+                        <!-- Loading Spinner -->
+                        <div class="loader" id="loader" hidden>
+                            <div class="spinner"></div>
+                            <p>Processing image...</p>
+                        </div>
+                    </div>
+                    <a id="downloadBtn" class="download-btn" hidden download="filtered-image.png">Download Result</a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

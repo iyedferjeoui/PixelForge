@@ -11,7 +11,7 @@ def grayscale(img):
     return img.convert("L")
 
 def invert(img):
-    img_array = np.array(img)
+    img_array = np.array(img.convert("RGB"))
     inverted = 255 - img_array
     return Image.fromarray(inverted.astype(np.uint8))
 
