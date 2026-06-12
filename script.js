@@ -1,6 +1,5 @@
-// Point this to your deployed backend (e.g. Render/Railway URL)
-// Example: 'https://pixelforge-backend.onrender.com/api/filter'
-const API_URL = 'https://YOUR-BACKEND-URL.onrender.com/api/filter';
+// Point this to your deployed backend
+const API_URL = 'https://pixelforge-3-h4s2.onrender.com/api/filter';
 
 const imageInput = document.getElementById('imageInput');
 const fileName = document.getElementById('fileName');
@@ -79,7 +78,7 @@ applyBtn.addEventListener('click', async () => {
         // The API returns the image file directly as a Blob
         const blob = await response.blob();
         const imageUrl = URL.createObjectURL(blob);
-        
+
         resultImage.src = imageUrl;
         downloadBtn.href = imageUrl;
         downloadBtn.hidden = false;
