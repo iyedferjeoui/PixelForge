@@ -34,8 +34,12 @@ dropZone.addEventListener('drop', (e) => {
 });
 
 function handleFile(file) {
-    if (!file || !file.type.startsWith('image/')) {
-        alert('Please select a valid image file.');
+    const validExtensions = /\.(jpe?g|png|gif|bmp|webp|tiff?)$/i;
+    const isImageType = file && file.type.startsWith('image/');
+    const isImageExt = file && validExtensions.test(file.name);
+
+    if (!file || (!isImageType && !isImageExt)) {
+        alert('Please select a valid image file (JPG, PNG, GIF, BMP, WEBP, TIFF).');
         return;
     }
 
@@ -64,11 +68,35 @@ applyBtn.addEventListener('click', async () => {
     formData.append('image', selectedFile);
     formData.append('filter_type', filterSelect.value);
 
+    // Show a "waking up server" message if it takes too long (Render free tier cold start)
+    const wakeupTimer = setTimeout(() => {
+        const loaderText = loader.querySelector('p');
+        if (loaderText) loaderText.textContent = 'Waking up the server, this can take up to a minute...';
+    }, 5000);
+
+    const fetchWithRetry = async (retries = 1) => {
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 90000); // 90s timeout
+
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                body: formData,
+                signal: controller.signal
+            });
+
+            clearTimeout(timeoutId);
+            return response;
+        } catch (err) {
+            if (retries > 0) {
+                return fetchWithRetry(retries - 1);
+            }
+            throw err;
+        }
+    };
+
     try {
-        const response = await fetch(API_URL, {
-            method: 'POST',
-            body: formData
-        });
+        const response = await fetchWithRetry();
 
         if (!response.ok) {
             const errorData = await response.json();
@@ -85,9 +113,16 @@ applyBtn.addEventListener('click', async () => {
 
     } catch (error) {
         console.error('Error processing image:', error);
-        alert('Failed to process image: ' + error.message);
+        if (error.name === 'AbortError') {
+            alert('The server took too long to respond. Please try again in a moment.');
+        } else {
+            alert('Failed to process image: ' + error.message);
+        }
     } finally {
+        clearTimeout(wakeupTimer);
         loader.hidden = true;
+        const loaderText = loader.querySelector('p');
+        if (loaderText) loaderText.textContent = 'Processing image...';
         applyBtn.disabled = false;
         applyBtn.textContent = 'Apply Filter';
     }
