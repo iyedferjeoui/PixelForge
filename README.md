@@ -36,11 +36,23 @@ REST API backend, deployable independently of the frontend
 
 🎨 Available Filters
 
-#FilterDescription1GrayscaleRemoves all color2InvertInverts all pixel colors3SepiaWarm vintage brown tone4Red filterKeeps only the red channel5Green filterKeeps only the green channel6Blue filterKeeps only the blue channel7BlurSoftens the image8SharpenMakes edges more defined9BrightnessMakes the image brighter10Flip HorizontalMirrors the image left-right11Flip VerticalFlips the image upside down12PixelateCreates a pixel art effect13Edge DetectionHighlights the edges in the image
+#      Filter               Description
+1      Grayscale            Removes all color
+2      Invert               Inverts all pixel colors
+3      Sepia                Warm vintage brown tone
+4      Red filter           Keeps only the red channel
+5      Green filter         Keeps only the green channel
+6      Blue filter          Keeps only the blue channel
+7      Blur                 Softens the image
+8      Sharpen              Makes edges more defined
+9      Brightness           Makes the image brighter
+10     Flip Horizontal      Mirrors the image left-right
+11     Flip Vertical        Flips the image upside down
+12     Pixelate             Creates a pixel art effect
+13     Edge Detection       Highlights the edges in the image
 
 
-🏗️ Architecture
-
+Architecture
 
 Frontend: static HTML/CSS/JS, hosted on Vercel
 Backend: Flask API with Flask-CORS and Gunicorn, hosted on Render
