@@ -2,8 +2,7 @@
 
 A Python image filtering tool with 13 filters (grayscale, sepia, blur, edge detection and more), originally built as a terminal project with Pillow & NumPy — and now reborn as a full-stack web app.
 
-🌐 Live Demo: pixelforgewebapp.vercel.app
-
+🌐 Live Demo: https://pixelforgewebapp.vercel.app
 
 🚀 From Script to Web App
 
